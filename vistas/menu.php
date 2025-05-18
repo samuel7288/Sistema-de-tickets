@@ -39,7 +39,17 @@
             </li>
 
             <li class="dropdown nav-item <?php echo ($currentPage == 'categorias.php' || $currentPage == 'tickets.php') ? 'active' : ''; ?>">
+             <?php if($_SESSION['usuario']=="admin"): ?>
+              <li class="nav-item">
+                <a href="usuarios.php"><span class="glyphicon glyphicon-user"></span> Administrar usuarios</a>
+              </li>
+            <?php endif; ?>
+
             
+            <li class="nav-item">
+              <a href="edades.php"><span class="glyphicon glyphicon-user"></span> Edades</a>
+            </li>
+
             <li class="dropdown nav-item">
               <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <span class="glyphicon glyphicon-user"></span> 
@@ -53,6 +63,7 @@
                   </a>
                 </li>
               </ul>
+              
             </li>
           </ul>
         </div>
