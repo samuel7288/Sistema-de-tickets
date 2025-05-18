@@ -50,6 +50,10 @@
               <a href="edades.php"><span class="glyphicon glyphicon-user"></span> Edades</a>
             </li>
 
+            <li class="nav-item">
+              <a href="ventas.php"><span class="glyphicon glyphicon-usd"></span> Seccion Ventas</a>
+            </li>
+
             <li class="dropdown nav-item">
               <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <span class="glyphicon glyphicon-user"></span> 
