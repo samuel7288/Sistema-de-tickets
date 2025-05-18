@@ -23,7 +23,7 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Toggle navigationssss</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -39,17 +39,7 @@
             </li>
 
             <li class="dropdown nav-item <?php echo ($currentPage == 'categorias.php' || $currentPage == 'tickets.php') ? 'active' : ''; ?>">
-             <?php if($_SESSION['usuario']=="admin"): ?>
-              <li class="nav-item">
-                <a href="usuarios.php"><span class="glyphicon glyphicon-user"></span> Administrar usuarios</a>
-              </li>
-            <?php endif; ?>
-
             
-            <li class="nav-item">
-              <a href="edades.php"><span class="glyphicon glyphicon-user"></span> Edades</a>
-            </li>
-
             <li class="dropdown nav-item">
               <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <span class="glyphicon glyphicon-user"></span> 
@@ -63,7 +53,6 @@
                   </a>
                 </li>
               </ul>
-              
             </li>
           </ul>
         </div>
@@ -72,6 +61,7 @@
   </div>
 </body>
 </html>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
