@@ -2,6 +2,7 @@
 session_start();
 if(isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin'){
 	?>
+	
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -26,6 +27,7 @@ if(isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin'){
 						<input type="text" class="form-control input-sm" name="password" id="password">
 						<p></p>
 						<span class="btn btn-primary" id="registro">Registrar</span>
+
 
 					</form>
 				</div>

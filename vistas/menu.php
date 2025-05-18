@@ -45,6 +45,7 @@
               </li>
             <?php endif; ?>
 
+            
             <li class="nav-item">
               <a href="edades.php"><span class="glyphicon glyphicon-user"></span> Edades</a>
             </li>

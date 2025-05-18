@@ -6,5 +6,6 @@
 	$obj= new usuarios;
 
 	echo $obj->eliminaUsuario($_POST['idusuario']);
+	
 
  ?>

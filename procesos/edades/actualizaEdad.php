@@ -7,6 +7,7 @@ session_start();
 	$obj= new edades();
 
 
+	
 	$datos=array(
 			$_POST['idedadU'],
 			$_POST['nombreU'],

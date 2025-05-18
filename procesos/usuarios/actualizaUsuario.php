@@ -13,5 +13,6 @@
 				);  
 	echo $obj->actualizaUsuario($datos);
 
+	
 
  ?>

@@ -6,5 +6,6 @@
 	$obj= new edades();
 
 	
+	
 	echo $obj->eliminaEdad($_POST['idedad']);
  ?>
