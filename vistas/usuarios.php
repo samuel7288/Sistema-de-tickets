@@ -1,34 +1,67 @@
 <?php 
 session_start();
-if(isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin'){
+if(isset($_SESSION['usuario']) and isset($_SESSION['rol']) and $_SESSION['rol']=='administrador'){
 	?>
-	
 	<!DOCTYPE html>
-	<html>
-	<head>
+	<html>	<head>
 		<title>Usuarios</title>
 		<?php require_once "menu.php"; ?>
 		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">		<style>
+			.form-group {
+				margin-bottom: 15px;
+			}
+			.form-group label {
+				display: block;
+				margin-bottom: 5px;
+				font-weight: bold;
+			}
+			.form-group .form-control {
+				width: 100%;
+			}
+			/* Arreglar altura del select */
+			select.form-control.input-sm {
+				height: 30px !important;
+				line-height: 1.5 !important;
+				padding: 5px 10px !important;
+			}
+			/* Asegurar que el texto no se corte */
+			select.form-control option {
+				padding: 5px;
+				line-height: normal;
+			}
+		</style>
 	</head>
-	<body>
-		<div class="container">
+	<body>		<div class="container">
 			<h1>Administrar usuarios</h1>
-			<div class="row">
-				<div class="col-sm-4">
+			<div class="row">				<div class="col-sm-4">
 					<form id="frmRegistro">
-						<label>Nombre</label>
-						<input type="text" class="form-control input-sm" name="nombre" id="nombre">
-						<label>Apellido</label>
-						<input type="text" class="form-control input-sm" name="apellido" id="apellido">
-						<label>Usuario</label>
-						<input type="text" class="form-control input-sm" name="usuario" id="usuario">
-						<label>Password</label>
-						<input type="text" class="form-control input-sm" name="password" id="password">
-						<p></p>
-						<span class="btn btn-primary" id="registro">Registrar</span>
-
-
+						<div class="form-group">
+							<label>Nombre</label>
+							<input type="text" class="form-control input-sm" name="nombre" id="nombre">
+						</div>
+						<div class="form-group">
+							<label>Apellido</label>
+							<input type="text" class="form-control input-sm" name="apellido" id="apellido">
+						</div>
+						<div class="form-group">
+							<label>Usuario</label>
+							<input type="text" class="form-control input-sm" name="usuario" id="usuario">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="text" class="form-control input-sm" name="password" id="password">
+						</div>
+						<div class="form-group">
+							<label>Rol</label>
+							<select class="form-control input-sm" name="rol" id="rol">
+								<option value="personal">Personal de la Feria</option>
+								<option value="administrador">Administrador</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<span class="btn btn-primary" id="registro">Registrar</span>
+						</div>
 					</form>
 				</div>
 				<div class="col-sm-7">
@@ -48,17 +81,28 @@ if(isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin'){
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title" id="myModalLabel">Actualiza Usuario</h4>
-					</div>
-					<div class="modal-body">
+					</div>					<div class="modal-body">
 						<form id="frmRegistroU">
 							<input type="text" hidden="" id="idUsuario" name="idUsuario">
-							<label>Nombre</label>
-							<input type="text" class="form-control input-sm" name="nombreU" id="nombreU">
-							<label>Apellido</label>
-							<input type="text" class="form-control input-sm" name="apellidoU" id="apellidoU">
-							<label>Usuario</label>
-							<input type="text" class="form-control input-sm" name="usuarioU" id="usuarioU">
-
+							<div class="form-group">
+								<label>Nombre</label>
+								<input type="text" class="form-control input-sm" name="nombreU" id="nombreU">
+							</div>
+							<div class="form-group">
+								<label>Apellido</label>
+								<input type="text" class="form-control input-sm" name="apellidoU" id="apellidoU">
+							</div>
+							<div class="form-group">
+								<label>Usuario</label>
+								<input type="text" class="form-control input-sm" name="usuarioU" id="usuarioU">
+							</div>
+							<div class="form-group">
+								<label>Rol</label>
+								<select class="form-control input-sm" name="rolU" id="rolU">
+									<option value="personal">Personal de la Feria</option>
+									<option value="administrador">Administrador</option>
+								</select>
+							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -72,8 +116,7 @@ if(isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin'){
 	</body>
 	</html>
 
-	<script type="text/javascript">
-		function agregaDatosUsuario(idusuario){
+	<script type="text/javascript">		function agregaDatosUsuario(idusuario){
 
 			$.ajax({
 				type:"POST",
@@ -86,6 +129,7 @@ if(isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin'){
 					$('#nombreU').val(dato['nombre']);
 					$('#apellidoU').val(dato['apellido']);
 					$('#usuarioU').val(dato['email']);
+					$('#rolU').val(dato['rol']);
 				}
 			});
 		}

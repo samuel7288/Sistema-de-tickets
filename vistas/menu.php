@@ -28,6 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right nav-animated">
@@ -37,27 +38,41 @@
             <li class="nav-item <?php echo ($currentPage == 'inicio.php') ? 'active' : ''; ?>">
               <a href="inicio.php"><span class="glyphicon glyphicon-home"></span> Inicio</a>
             </li>
-
+            
             <li class="dropdown nav-item <?php echo ($currentPage == 'categorias.php' || $currentPage == 'tickets.php') ? 'active' : ''; ?>">
-             <?php if($_SESSION['usuario']=="admin"): ?>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-list-alt"></span> Gestionar <span class="caret"></span>
+              </a>              <ul class="dropdown-menu animated-dropdown">
+                <li><a href="categorias.php">Categorias</a></li>
+                <li><a href="tickets.php">Tickets</a></li>
+              </ul>            </li>
+
+            <?php // Dashboard ocultado ?>
+            <?php /* if(isset($_SESSION['rol']) && $_SESSION['rol'] == "administrador"): ?>
+            <li class="nav-item"><a href="dashboard.php">Dashboard</a></li>
+            <?php endif; */ ?>
+
+            <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == "administrador"): ?>
               <li class="nav-item">
                 <a href="usuarios.php"><span class="glyphicon glyphicon-user"></span> Administrar usuarios</a>
               </li>
             <?php endif; ?>
 
-            
+            <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == "administrador"): ?>
             <li class="nav-item">
               <a href="edades.php"><span class="glyphicon glyphicon-user"></span> Edades</a>
             </li>
-
+            <?php endif; ?>
             <li class="nav-item">
               <a href="ventas.php"><span class="glyphicon glyphicon-usd"></span> Seccion Ventas</a>
             </li>
-
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            
+            <li class="dropdown nav-item">              <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <span class="glyphicon glyphicon-user"></span> 
                 Usuario: <?php echo $_SESSION['usuario']; ?> 
+                <?php if(isset($_SESSION['rol'])): ?>
+                  (<?php echo ucfirst($_SESSION['rol']); ?>)
+                <?php endif; ?>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu animated-dropdown">
@@ -67,7 +82,6 @@
                   </a>
                 </li>
               </ul>
-              
             </li>
           </ul>
         </div>
