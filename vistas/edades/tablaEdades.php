@@ -13,7 +13,6 @@
 	$result=mysqli_query($conexion,$sql);
  ?>
 
-
 <div class="table-responsive">
 	 <table class="table table-hover table-condensed table-bordered" style="text-align: center;">
 	 	<caption><label>Edades</label></caption>
