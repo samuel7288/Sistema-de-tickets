@@ -25,3 +25,172 @@ section {
   -o-transition:padding 0.5s linear;         
   transition:padding 0.5s linear;  
 }
+
+/* Fix navbar alignment issues */
+.navbar-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-right {
+  float: right !important;
+}
+
+.navbar-nav > li {
+  float: left;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
+}
+
+/* Ensure proper spacing for user menu */
+.user-menu {
+  white-space: nowrap;
+}
+
+/* Fix responsive behavior - Force inline layout for desktop */
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  
+  .navbar-nav.navbar-right {
+    float: right !important;
+    margin-right: 0;
+  }
+  
+  .navbar-nav > li {
+    float: left !important;
+  }
+  
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  
+  /* Force user menu to stay inline */
+  .navbar-nav > li.dropdown {
+    float: left !important;
+  }
+}
+
+/* Override any conflicting styles that might cause wrapping */
+@media (min-width: 769px) {
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+  }
+  
+  .navbar-right {
+    float: right !important;
+  }
+}
+
+/* MODERN FLEXBOX SOLUTION - Override Bootstrap's float system */
+@media (min-width: 768px) {
+  .navbar-collapse {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+  }
+  
+  .navbar-nav.navbar-right {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+  
+  .navbar-nav.navbar-right > li {
+    float: none !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  /* Ensure user menu stays inline */
+  .navbar-nav > li.dropdown {
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .user-menu {
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+/* Fallback for older browsers */
+.navbar-nav.navbar-right {
+  margin-right: 0 !important;
+}
+
+/* Force all menu items to stay on same line - CRITICAL FIX */
+@media (min-width: 768px) {
+  .navbar-nav.navbar-right > li {
+    float: left !important;
+    clear: none !important;
+  }
+  
+  .navbar-nav.navbar-right {
+    width: auto !important;
+    float: right !important;
+    display: block !important;
+  }
+  
+  /* Specific fix for user menu dropdown */
+  .navbar-nav > li.dropdown.nav-item:last-child {
+    float: left !important;
+    clear: none !important;
+  }
+}
+
+/* Override any styles that might cause line breaks */
+@media screen and (min-width: 768px) {
+  .navbar-nav {
+    width: auto;
+    float: left;
+  }
+  
+  .navbar-nav.navbar-right {
+    float: right !important;
+    margin-right: 0;
+  }
+  
+  .navbar-nav > li {
+    float: left !important;
+    width: auto !important;
+    display: block !important;
+  }
+  
+  /* Critical: Force user dropdown to stay inline */
+  .user-menu {
+    white-space: nowrap !important;
+  }
+}
+
+/* Extra specific rule to override any conflicting styles */
+.navbar-inverse .navbar-nav.navbar-right > li {
+  float: left !important;
+  vertical-align: top !important;
+}
+
+/* Ensure container has enough width */
+.navbar .container {
+  width: 100% !important;
+  max-width: none !important;
+}
