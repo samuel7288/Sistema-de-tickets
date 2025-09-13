@@ -13,6 +13,12 @@ COPY . .
 # Configurar permisos básicos
 RUN chmod -R 755 .
 
+# Crear un archivo de prueba para verificar que PHP funciona
+RUN echo '<?php phpinfo(); ?>' > /app/test.php
+
+# Crear un index de prueba que no dependa de base de datos
+RUN echo '<?php echo "Sistema funcionando en Railway!"; ?>' > /app/index-test.php
+
 # Exponer puerto para Railway
 EXPOSE $PORT
 

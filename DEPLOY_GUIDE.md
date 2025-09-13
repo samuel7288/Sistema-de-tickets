@@ -225,6 +225,31 @@ ERROR: failed to build: failed to solve
    ```
 3. **Alternativa manual**: Las librerías están incluidas en `librerias/` y `vendor/`, no requiere Composer en Railway
 
+### ❌ **Error 500 - Internal Server Error / Healthcheck Failed**
+```bash
+Attempt #X failed with status 500
+1/1 replicas never became healthy!
+Healthcheck failed!
+```
+**Causa**: La aplicación se inicia pero falla al conectar a la base de datos.
+
+**Solución Inmediata:**
+```bash
+# Usar versión segura que maneja errores de BD
+cp index-safe.php index.php
+cp Dockerfile.minimal Dockerfile
+git add .
+git commit -m "Arreglar error 500 - Manejo seguro de BD"
+git push
+```
+
+**Pasos Post-Despliegue:**
+1. ✅ La aplicación ahora se inicia sin BD
+2. 🔧 Muestra instrucciones para configurar MySQL  
+3. 📊 Ve a `/health-check.php` para diagnóstico
+4. 🗄️ Agrega MySQL en Railway cuando esté listo
+5. 🎯 Importa `bd/tiquetera2.sql`
+
 ### Error 500 - Internal Server Error
 **Solución:**
 1. Revisa los logs de la aplicación en Railway
