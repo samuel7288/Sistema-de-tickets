@@ -36,33 +36,27 @@ DirectoryIndex index.php
 
 # Proteger archivos sensibles
 <Files "composer.json">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
 <Files "composer.lock">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
 <Files ".env">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
 <Files "*.log">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
-# Proteger directorios
-<DirectoryMatch "^(.*/)?\.git/">
-    Order allow,deny
-    Deny from all
-</DirectoryMatch>
+# Proteger directorio .git usando RewriteRule
+RewriteCond %{REQUEST_URI} ^/\.git [NC]
+RewriteRule .* - [F,L]
 
 # Configuración PHP
-<IfModule mod_php8.c>
+<IfModule mod_php.c>
     php_value upload_max_filesize 10M
     php_value post_max_size 10M
     php_value memory_limit 256M

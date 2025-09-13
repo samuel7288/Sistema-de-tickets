@@ -7,8 +7,11 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos del proyecto
+# Copiar archivos del proyecto (excluyendo .htaccess que no se usa con built-in server)
 COPY . .
+
+# Remover .htaccess ya que usamos PHP built-in server
+RUN rm -f .htaccess
 
 # Configurar permisos básicos
 RUN chmod -R 755 .
@@ -22,5 +25,5 @@ RUN echo '<?php echo "Sistema funcionando en Railway!"; ?>' > /app/index-test.ph
 # Exponer puerto para Railway
 EXPOSE $PORT
 
-# Usar servidor built-in de PHP
+# Usar servidor built-in de PHP (no necesita .htaccess)
 CMD php -S 0.0.0.0:$PORT -t .

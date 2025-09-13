@@ -1,0 +1,13 @@
+# .htaccess ultra-simplificado para Railway
+RewriteEngine On
+
+# Página de inicio
+DirectoryIndex index.php
+
+# Proteger archivos sensibles con RewriteRule
+RewriteCond %{REQUEST_FILENAME} \.(json|lock|log|env)$ [NC]
+RewriteRule .* - [F,L]
+
+# Bloquear acceso a .git
+RewriteCond %{REQUEST_URI} ^/\.git [NC]
+RewriteRule .* - [F,L]

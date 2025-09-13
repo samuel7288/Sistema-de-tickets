@@ -225,6 +225,32 @@ ERROR: failed to build: failed to solve
    ```
 3. **Alternativa manual**: Las librerías están incluidas en `librerias/` y `vendor/`, no requiere Composer en Railway
 
+### ❌ **Error de .htaccess**
+```bash
+[core:alert] /var/www/html/.htaccess: <DirectoryMatch not allowed here
+```
+**Causa**: Apache en Railway no permite ciertas directivas en .htaccess.
+
+**Solución:**
+```bash
+# Opción 1: .htaccess corregido (ya actualizado)
+git add .
+git commit -m "Arreglar .htaccess para Railway"
+git push
+
+# Opción 2: .htaccess simplificado
+cp .htaccess-simple .htaccess
+git add .
+git commit -m "Usar .htaccess simplificado"
+git push
+
+# Opción 3: Sin .htaccess (con PHP built-in)
+cp Dockerfile.minimal Dockerfile
+git add .
+git commit -m "Usar PHP built-in sin .htaccess"
+git push
+```
+
 ### ❌ **Error 500 - Internal Server Error / Healthcheck Failed**
 ```bash
 Attempt #X failed with status 500
