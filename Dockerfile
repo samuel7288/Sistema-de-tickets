@@ -1,0 +1,35 @@
+# Usa una imagen oficial de PHP con Apache
+FROM php:8.2-apache
+
+# Instalar extensiones de PHP necesarias
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Instalar extensiones adicionales que podríamos necesitar
+RUN docker-php-ext-install gd zip
+
+# Habilitar mod_rewrite de Apache
+RUN a2enmod rewrite
+
+# Configurar Apache para escuchar en el puerto dinámico de Railway
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
+# Copiar archivos del proyecto
+COPY . /var/www/html/
+
+# Configurar permisos
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
+# Crear script de inicio que configure el puerto dinámicamente
+RUN echo '#!/bin/bash\n\
+if [ -n "$PORT" ]; then\n\
+    sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf\n\
+    sed -i "s/:80/:$PORT/" /etc/apache2/sites-available/000-default.conf\n\
+fi\n\
+apache2-foreground' > /start.sh && chmod +x /start.sh
+
+# Exponer puerto (Railway lo configurará dinámicamente)
+EXPOSE $PORT
+
+# Comando por defecto
+CMD ["/start.sh"]
