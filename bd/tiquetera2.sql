@@ -145,6 +145,7 @@ CREATE TABLE usuarios (
   apellido varchar(50) DEFAULT NULL,
   email varchar(50) DEFAULT NULL,
   password tinytext DEFAULT NULL,
+  rol enum('administrador','personal') DEFAULT 'personal',
   fechaCaptura date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -152,8 +153,8 @@ CREATE TABLE usuarios (
 -- Volcado de datos para la tabla usuarios
 --
 
-INSERT INTO usuarios (id_usuario, nombre, apellido, email, password, fechaCaptura) VALUES
-(1, 'Jose', 'Antonio', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '2024-11-09');
+INSERT INTO usuarios (id_usuario, nombre, apellido, email, password, rol, fechaCaptura) VALUES
+(1, 'Jose', 'Antonio', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'administrador', '2024-11-09');
 
 -- --------------------------------------------------------
 
@@ -167,18 +168,25 @@ CREATE TABLE ventas (
   id_ticket int(11) DEFAULT NULL,
   id_usuario int(11) DEFAULT NULL,
   precio float DEFAULT NULL,
-  fechaCompra date DEFAULT NULL
+  fechaCompra date DEFAULT NULL,
+  horaCompra time DEFAULT NULL,
+  documento_cliente varchar(50) DEFAULT NULL,
+  numero_ticket varchar(100) DEFAULT NULL,
+  estado enum('ACTIVO','ANULADO') DEFAULT 'ACTIVO',
+  id_usuario_anulacion int(11) DEFAULT NULL,
+  fecha_anulacion datetime DEFAULT NULL,
+  motivo_anulacion text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla ventas
 --
 
-INSERT INTO ventas (id_venta, id_edad, id_ticket, id_usuario, precio, fechaCompra) VALUES
-(2, 1, 1, 1, 2, '2024-11-09'),
-(3, 1, 1, 1, 2, '2024-11-09'),
-(4, 1, 1, 1, 2, '2024-11-09'),
-(4, 1, 1, 1, 2, '2024-11-09');
+INSERT INTO ventas (id_venta, id_edad, id_ticket, id_usuario, precio, fechaCompra, horaCompra, documento_cliente, numero_ticket, estado, id_usuario_anulacion, fecha_anulacion, motivo_anulacion) VALUES
+(2, 1, 1, 1, 2, '2024-11-09', '14:30:00', '12345678', 'TICK-20241109-002', 'ACTIVO', NULL, NULL, NULL),
+(3, 1, 1, 1, 2, '2024-11-09', '15:45:00', '87654321', 'TICK-20241109-003', 'ACTIVO', NULL, NULL, NULL),
+(4, 1, 1, 1, 2, '2024-11-09', '16:20:00', '11223344', 'TICK-20241109-004', 'ACTIVO', NULL, NULL, NULL),
+(5, 1, 1, 1, 2, '2024-11-09', '17:10:00', '44332211', 'TICK-20241109-005', 'ANULADO', 1, '2024-11-09 18:00:00', 'Ticket anulado por solicitud del cliente');
 
 --
 -- Índices para tablas volcadas
@@ -246,6 +254,17 @@ ALTER TABLE tickets
 --
 ALTER TABLE usuarios
   MODIFY id_usuario int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Índices adicionales para mejorar rendimiento de búsquedas
+--
+CREATE INDEX idx_numero_ticket ON ventas(numero_ticket);
+CREATE INDEX idx_documento_cliente ON ventas(documento_cliente);
+CREATE INDEX idx_estado ON ventas(estado);
+CREATE INDEX idx_fecha_compra_hora ON ventas(fechaCompra, horaCompra);
+CREATE INDEX idx_usuario_anulacion ON ventas(id_usuario_anulacion);
+CREATE INDEX idx_fecha_anulacion ON ventas(fecha_anulacion);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

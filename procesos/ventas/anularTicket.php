@@ -16,7 +16,7 @@ if(!isset($_SESSION['iduser'])) {
 $obj = new ventas();
 
 $idVenta = isset($_POST['idVenta']) ? $_POST['idVenta'] : '';
-$motivo = isset($_POST['motivo']) ? $_POST['motivo'] : '';
+$motivo = isset($_POST['motivo']) ? trim($_POST['motivo']) : '';
 $idUsuarioAnulacion = $_SESSION['iduser'];
 
 // Validar que se recibieron los datos necesarios
@@ -31,9 +31,14 @@ if(!$obj->verificarTicketAnulable($idVenta)) {
     exit;
 }
 
-// Validar que el motivo no esté vacío
-if(empty(trim($motivo))) {
+// Validar que el motivo no esté vacío y tenga al menos 10 caracteres
+if(empty($motivo)) {
     echo "Error: Debe especificar un motivo para la anulación";
+    exit;
+}
+
+if(strlen($motivo) < 10) {
+    echo "Error: El motivo debe tener al menos 10 caracteres";
     exit;
 }
 

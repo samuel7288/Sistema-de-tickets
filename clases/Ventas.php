@@ -183,6 +183,117 @@ class ventas{
 		$total = mysqli_fetch_row($result)[0];
 		return $total;
 	}
+
+	// Métodos para sistema de anulación de tickets
+	
+	public function buscarTicketParaAnular($criterio, $valor){
+		$c = new conectar();
+		$conexion = $c->conexion();
+		
+		$sql = "";
+		
+		switch($criterio) {
+			case 'numero_ticket':
+				$sql = "SELECT v.*, u.nombre as usuario_venta, t.nombre as ticket_nombre 
+						FROM ventas v 
+						LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario 
+						LEFT JOIN tickets t ON v.id_ticket = t.id_ticket 
+						WHERE v.numero_ticket = '$valor' AND v.estado = 'ACTIVO'";
+				break;
+			case 'documento':
+				$sql = "SELECT v.*, u.nombre as usuario_venta, t.nombre as ticket_nombre 
+						FROM ventas v 
+						LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario 
+						LEFT JOIN tickets t ON v.id_ticket = t.id_ticket 
+						WHERE v.documento_cliente = '$valor' AND v.estado = 'ACTIVO'";
+				break;
+			case 'fecha_hora':
+				$fecha_hora = explode(' ', $valor);
+				$fecha = $fecha_hora[0];
+				$hora = isset($fecha_hora[1]) ? $fecha_hora[1] : '';
+				
+				if($hora) {
+					$sql = "SELECT v.*, u.nombre as usuario_venta, t.nombre as ticket_nombre 
+							FROM ventas v 
+							LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario 
+							LEFT JOIN tickets t ON v.id_ticket = t.id_ticket 
+							WHERE v.fechaCompra = '$fecha' AND v.horaCompra = '$hora' AND v.estado = 'ACTIVO'";
+				} else {
+					$sql = "SELECT v.*, u.nombre as usuario_venta, t.nombre as ticket_nombre 
+							FROM ventas v 
+							LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario 
+							LEFT JOIN tickets t ON v.id_ticket = t.id_ticket 
+							WHERE v.fechaCompra = '$fecha' AND v.estado = 'ACTIVO'";
+				}
+				break;
+		}
+		
+		$result = mysqli_query($conexion, $sql);
+		$tickets = array();
+		
+		while($row = mysqli_fetch_assoc($result)) {
+			$tickets[] = $row;
+		}
+		
+		return $tickets;
+	}
+	
+	public function anularTicket($idVenta, $motivo, $idUsuarioAnulacion){
+		$c = new conectar();
+		$conexion = $c->conexion();
+		
+		$fechaAnulacion = date('Y-m-d H:i:s');
+		
+		$sql = "UPDATE ventas SET 
+				estado = 'ANULADO',
+				id_usuario_anulacion = '$idUsuarioAnulacion',
+				fecha_anulacion = '$fechaAnulacion',
+				motivo_anulacion = '$motivo'
+				WHERE id_venta = '$idVenta' AND estado = 'ACTIVO'";
+		
+		return mysqli_query($conexion, $sql);
+	}
+	
+	public function verificarTicketAnulable($idVenta){
+		$c = new conectar();
+		$conexion = $c->conexion();
+		
+		$sql = "SELECT * FROM ventas WHERE id_venta = '$idVenta' AND estado = 'ACTIVO'";
+		$result = mysqli_query($conexion, $sql);
+		
+		return mysqli_num_rows($result) > 0;
+	}
+	
+	public function obtenerHistorialAnulaciones($filtro = ''){
+		$c = new conectar();
+		$conexion = $c->conexion();
+		
+		$whereClause = "WHERE v.estado = 'ANULADO'";
+		
+		if($filtro) {
+			$whereClause .= " AND (v.numero_ticket LIKE '%$filtro%' OR v.documento_cliente LIKE '%$filtro%')";
+		}
+		
+		$sql = "SELECT v.*, 
+				u_venta.nombre as usuario_venta,
+				u_anulacion.nombre as usuario_anulacion,
+				t.nombre as ticket_nombre
+				FROM ventas v
+				LEFT JOIN usuarios u_venta ON v.id_usuario = u_venta.id_usuario
+				LEFT JOIN usuarios u_anulacion ON v.id_usuario_anulacion = u_anulacion.id_usuario
+				LEFT JOIN tickets t ON v.id_ticket = t.id_ticket
+				$whereClause
+				ORDER BY v.fecha_anulacion DESC";
+		
+		$result = mysqli_query($conexion, $sql);
+		$anulaciones = array();
+		
+		while($row = mysqli_fetch_assoc($result)) {
+			$anulaciones[] = $row;
+		}
+		
+		return $anulaciones;
+	}
 }
 
 ?>

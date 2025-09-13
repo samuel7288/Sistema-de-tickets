@@ -15,6 +15,31 @@
       height: 70px;
       width: auto;
     }
+    
+    /* CRITICAL FIX: Force menu items to stay inline */
+    @media (min-width: 768px) {
+      .navbar-collapse {
+        display: flex !important;
+        justify-content: flex-end !important;
+      }
+      
+      .navbar-nav.navbar-right {
+        display: flex !important;
+        flex-direction: row !important;
+        margin: 0 !important;
+        float: none !important;
+      }
+      
+      .navbar-nav.navbar-right > li {
+        display: flex !important;
+        align-items: center !important;
+        float: none !important;
+      }
+      
+      .user-menu {
+        white-space: nowrap !important;
+      }
+    }
   </style>
 </head>
 <body>
