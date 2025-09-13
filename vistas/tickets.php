@@ -19,33 +19,142 @@ if(isset($_SESSION['usuario'])){
 	</head>
 	<body>
 		<div class="container">
-			<h1>Ticket</h1>
-			<div class="row">
-				<div class="col-sm-4">
-					<form id="frmTickets" enctype="multipart/form-data">
-						<label>Categoria</label>
-						<select class="form-control" id="categoriaSelect" name="categoriaSelect">
-							<option value="A">Selecciona Categoria</option>
-							<?php while($ver=mysqli_fetch_row($result)): ?>
-								<option value="<?php echo $ver[0] ?>"><?php echo $ver[1]; ?></option>
-							<?php endwhile; ?>
-						</select>
-						<label>Nombre</label>
-						<input type="text" class="form-control input-sm" id="nombre" name="nombre">
-						<label>Descripcion</label>
-						<input type="text" class="form-control input-sm" id="descripcion" name="descripcion">
-						<label>Cantidad Disponible</label>
-						<input type="text" class="form-control input-sm" id="cantidad" name="cantidad">
-						<label>Precio</label>
-						<input type="text" class="form-control input-sm" id="precio" name="precio">
-						<label>Imagen</label>
-						<input type="file" id="imagen" name="imagen">
-						<p></p>
-						<span id="btnAgregaTicket" class="btn btn-primary">Agregar</span>
-					</form>
+			<!-- Título Principal con Icono -->
+			<div class="page-header">
+				<div class="header-content">
+					<i class="fas fa-ticket-alt page-icon"></i>
+					<h1 class="page-title">Gestión de Tickets</h1>
+					<p class="page-subtitle">Administra los tickets disponibles para la feria</p>
 				</div>
+			</div>
+
+			<div class="row">
+				<!-- FORMULARIO MODERNIZADO -->
+				<div class="col-sm-4">
+					<div class="form-card">
+						<div class="form-header">
+							<i class="fas fa-plus-circle form-icon"></i>
+							<h3 class="form-title">Nuevo Ticket</h3>
+						</div>
+						<form id="frmTickets" class="modern-form" enctype="multipart/form-data">
+							<div class="form-group">
+								<label class="form-label">
+									<i class="fas fa-tags label-icon"></i>
+									Categoría
+								</label>
+								<select class="form-control modern-input" id="categoriaSelect" name="categoriaSelect">
+									<option value="A">Selecciona Categoría</option>
+									<?php while($ver=mysqli_fetch_row($result)): ?>
+										<option value="<?php echo $ver[0] ?>"><?php echo $ver[1]; ?></option>
+									<?php endwhile; ?>
+								</select>
+								<div class="input-feedback" id="categoriaSelectFeedback"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">
+									<i class="fas fa-signature label-icon"></i>
+									Nombre del Ticket
+								</label>
+								<input type="text" 
+									   class="form-control modern-input" 
+									   id="nombre" 
+									   name="nombre"
+									   placeholder="Ej: Montaña Rusa, Rueda de la Fortuna">
+								<div class="input-feedback" id="nombreFeedback"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">
+									<i class="fas fa-align-left label-icon"></i>
+									Descripción
+								</label>
+								<textarea class="form-control modern-input" 
+									      id="descripcion" 
+									      name="descripcion" 
+									      rows="3"
+									      placeholder="Describe la atracción o actividad"></textarea>
+								<div class="input-feedback" id="descripcionFeedback"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">
+									<i class="fas fa-warehouse label-icon"></i>
+									Cantidad Disponible
+								</label>
+								<input type="number" 
+									   class="form-control modern-input" 
+									   id="cantidad" 
+									   name="cantidad"
+									   min="1"
+									   placeholder="Ej: 100">
+								<small class="input-help">
+									<i class="fas fa-info-circle"></i>
+									Número de tickets disponibles para venta
+								</small>
+								<div class="input-feedback" id="cantidadFeedback"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">
+									<i class="fas fa-dollar-sign label-icon"></i>
+									Precio
+								</label>
+								<input type="number" 
+									   class="form-control modern-input" 
+									   id="precio" 
+									   name="precio"
+									   step="0.01"
+									   min="0"
+									   placeholder="Ej: 15.50">
+								<small class="input-help">
+									<i class="fas fa-info-circle"></i>
+									Precio en pesos mexicanos
+								</small>
+								<div class="input-feedback" id="precioFeedback"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">
+									<i class="fas fa-image label-icon"></i>
+									Imagen del Ticket
+								</label>
+								<input type="file" 
+									   class="form-control modern-input" 
+									   id="imagen" 
+									   name="imagen"
+									   accept="image/*">
+								<small class="input-help">
+									<i class="fas fa-info-circle"></i>
+									Formatos: JPG, PNG, GIF (máximo 2MB)
+								</small>
+								<div class="input-feedback" id="imagenFeedback"></div>
+							</div>
+
+							<div class="form-actions">
+								<button type="button" id="btnAgregaTicket" class="btn btn-primary modern-btn">
+									<i class="fas fa-plus btn-icon"></i>
+									<span class="btn-text">Crear Ticket</span>
+									<div class="btn-loading" style="display: none;">
+										<i class="fas fa-spinner fa-spin"></i>
+									</div>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<!-- TABLA MODERNIZADA -->
 				<div class="col-sm-8">
-					<div id="tablaTicketsLoad"></div>
+					<div class="table-card">
+						<div class="table-header">
+							<i class="fas fa-list table-icon"></i>
+							<h3 class="table-title">Tickets Registrados</h3>
+						</div>
+						<div class="table-responsive-custom">
+							<div id="tablaTicketsLoad"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

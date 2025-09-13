@@ -7,9 +7,14 @@
 <link rel="stylesheet" type="text/css" href="../librerias/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../librerias/select2/css/select2.css">
 <link rel="stylesheet" type="text/css" href="../css/menu.css">
+<link rel="stylesheet" type="text/css" href="../css/responsive.css">
+<link rel="stylesheet" type="text/css" href="../css/modern-design.css">
+<!-- Font Awesome para iconos modernos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <script src="../librerias/jquery-3.2.1.min.js"></script>
 <script src="../librerias/alertifyjs/alertify.js"></script>
 <script src="../librerias/bootstrap/js/bootstrap.js"></script>
 <script src="../librerias/select2/js/select2.js"></script>
 <script src="../js/funciones.js"></script>
+<script src="../js/modern-feedback.js"></script>

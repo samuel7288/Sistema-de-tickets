@@ -1,0 +1,321 @@
+/* ======================================
+   SISTEMA RESPONSIVE MODERNO - FERIA
+   ====================================== */
+
+/* Variables CSS para consistencia */
+:root {
+  --primary-color: #1a237e;
+  --secondary-color: #3f51b5;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --info-color: #2196f3;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  --transition: all 0.3s ease;
+}
+
+/* ======================================
+   RESPONSIVE BREAKPOINTS
+   ====================================== */
+
+/* Extra Small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 10px !important;
+    margin: 0 5px !important;
+  }
+  
+  /* Formularios móviles */
+  .form-responsive {
+    width: 100% !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    background: white;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 16px !important; /* Evita zoom en iOS */
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+  }
+  
+  .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+    outline: none;
+  }
+  
+  /* Botones responsivos */
+  .btn {
+    width: 100% !important;
+    padding: 15px !important;
+    font-size: 16px !important;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    margin-bottom: 10px !important;
+  }
+  
+  /* Títulos responsivos */
+  h1 {
+    font-size: 1.8rem !important;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Grid responsivo */
+  .row {
+    margin: 0 !important;
+  }
+  
+  .col-sm-4, .col-sm-8, .col-md-4, .col-md-8 {
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .container {
+    padding: 15px !important;
+  }
+  
+  .form-responsive {
+    width: 100% !important;
+    padding: 20px !important;
+    margin-bottom: 25px !important;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    background: white;
+  }
+  
+  .col-sm-4 {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  
+  .col-sm-8 {
+    width: 100% !important;
+  }
+}
+
+/* ======================================
+   TABLAS RESPONSIVE
+   ====================================== */
+
+@media only screen and (max-width: 768px) {
+  /* Contenedor de tabla responsive */
+  .table-responsive-custom {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+  }
+  
+  /* Tabla mobile-first */
+  .table-mobile {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+  
+  .table-mobile th,
+  .table-mobile td {
+    padding: 12px 8px !important;
+    font-size: 14px !important;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  
+  .table-mobile th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  /* Botones de acción en tablas */
+  .btn-sm {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    margin: 2px !important;
+    border-radius: 4px;
+  }
+  
+  /* Ocultar columnas menos importantes en móvil */
+  .table-mobile .hidden-mobile {
+    display: none;
+  }
+}
+
+/* ======================================
+   NAVEGACIÓN RESPONSIVE
+   ====================================== */
+
+@media only screen and (max-width: 768px) {
+  .navbar-collapse {
+    background: rgba(26, 35, 126, 0.98) !important;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  .navbar-nav > li {
+    margin: 5px 0;
+  }
+  
+  .navbar-nav > li > a {
+    padding: 15px 20px !important;
+    border-radius: 6px;
+    transition: var(--transition);
+  }
+  
+  .navbar-nav > li > a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ======================================
+   CARDS RESPONSIVE
+   ====================================== */
+
+@media only screen and (max-width: 768px) {
+  .card {
+    margin: 10px 0 !important;
+    padding: 20px !important;
+  }
+  
+  .card-body {
+    padding: 15px !important;
+  }
+  
+  .display-4 {
+    font-size: 2rem !important;
+  }
+  
+  .card-icon {
+    font-size: 2rem !important;
+  }
+}
+
+/* ======================================
+   MODALES RESPONSIVE
+   ====================================== */
+
+@media only screen and (max-width: 768px) {
+  .modal-dialog {
+    width: 95% !important;
+    margin: 10px auto !important;
+  }
+  
+  .modal-content {
+    border-radius: var(--border-radius);
+  }
+  
+  .modal-header {
+    padding: 20px !important;
+  }
+  
+  .modal-body {
+    padding: 20px !important;
+  }
+  
+  .modal-footer {
+    padding: 15px 20px !important;
+  }
+}
+
+/* ======================================
+   DASHBOARD RESPONSIVE
+   ====================================== */
+
+@media only screen and (max-width: 768px) {
+  .dashboard-content {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+    margin: 10px !important;
+  }
+  
+  .chart-container {
+    padding: 15px !important;
+    margin: 10px 0 !important;
+  }
+  
+  .tables-grid {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+}
+
+/* ======================================
+   UTILIDADES RESPONSIVE
+   ====================================== */
+
+/* Texto responsive */
+@media only screen and (max-width: 600px) {
+  .text-responsive {
+    font-size: 14px !important;
+    line-height: 1.4;
+  }
+  
+  .text-center-mobile {
+    text-align: center !important;
+  }
+  
+  /* Espaciado responsive */
+  .padding-mobile {
+    padding: 15px !important;
+  }
+  
+  .margin-mobile {
+    margin: 10px !important;
+  }
+}
+
+/* Mostrar/ocultar elementos según dispositivo */
+.hide-mobile {
+  @media only screen and (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.show-mobile {
+  display: none !important;
+  @media only screen and (max-width: 768px) {
+    display: block !important;
+  }
+}
+
+/* ======================================
+   LANDSCAPE ORIENTATION FIX
+   ====================================== */
+
+@media only screen and (max-width: 896px) and (orientation: landscape) {
+  body {
+    padding-top: 60px !important;
+  }
+  
+  .navbar-fixed-top {
+    position: relative !important;
+  }
+}
