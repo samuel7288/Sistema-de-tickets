@@ -47,10 +47,11 @@
                 <li><a href="tickets.php">Tickets</a></li>
               </ul>            </li>
 
-            <?php // Dashboard ocultado ?>
-            <?php /* if(isset($_SESSION['rol']) && $_SESSION['rol'] == "administrador"): ?>
-            <li class="nav-item"><a href="dashboard.php">Dashboard</a></li>
-            <?php endif; */ ?>
+            <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == "administrador"): ?>
+            <li class="nav-item <?php echo ($currentPage == 'dashboard.php') ? 'active' : ''; ?>">
+              <a href="dashboard.php"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+            </li>
+            <?php endif; ?>
 
             <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == "administrador"): ?>
               <li class="nav-item">
