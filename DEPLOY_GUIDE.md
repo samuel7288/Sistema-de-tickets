@@ -107,6 +107,35 @@ mysql> source bd/tiquetera2.sql;
 mysql -h [MYSQLHOST] -u [MYSQLUSER] -p[MYSQLPASSWORD] -P [MYSQLPORT] [MYSQLDATABASE] < bd/tiquetera2.sql
 ```
 
+## 🔧 Solución Rápida - Error de Composer
+
+Si obtienes el error `composer: command not found`, sigue estos pasos:
+
+### ✅ **Opción 1: Configuración Actualizada (Recomendada)**
+```bash
+# Asegúrate de tener la configuración correcta
+git add .
+git commit -m "Actualizar configuración de Nixpacks con Composer"
+git push
+```
+El `nixpacks.toml` actualizado incluye `php81Packages.composer`.
+
+### ✅ **Opción 2: Configuración Sin Composer (Respaldo)**
+Si la Opción 1 no funciona:
+```bash
+# Usar configuración alternativa
+cp nixpacks-simple.toml nixpacks.toml
+git add .
+git commit -m "Usar configuración sin Composer"
+git push
+```
+
+### ✅ **Por qué funciona sin Composer**
+Tu proyecto ya incluye todas las librerías necesarias:
+- ✅ Bootstrap, jQuery en `librerias/`
+- ✅ DomPDF en `vendor/` (pre-instalado)
+- ✅ No requiere instalación adicional
+
 ## 🔧 Paso 5: Verificar Configuración
 
 ### 5.1 Variables de entorno
@@ -151,14 +180,22 @@ Error: Could not connect to database
 2. Confirma que las variables de entorno están configuradas
 3. Revisa los logs en Railway
 
-### Error de build
+### Error de build con Composer
 ```
-Build failed: composer install
+/bin/bash: line 1: composer: command not found
+ERROR: failed to build: failed to solve
 ```
 **Solución:**
-1. Verifica que `composer.json` está en el repositorio
-2. Asegúrate de que las dependencias son válidas
-3. Revisa los logs de build en Railway
+1. **El archivo `nixpacks.toml` ya está configurado correctamente** con `php81Packages.composer`
+2. **Si persiste el problema, usa la configuración alternativa:**
+   ```bash
+   # Renombrar la configuración simple
+   mv nixpacks-simple.toml nixpacks.toml
+   git add .
+   git commit -m "Usar configuración sin Composer"
+   git push
+   ```
+3. **Alternativa manual**: Las librerías están incluidas en `librerias/` y `vendor/`, no requiere Composer en Railway
 
 ### Error 500 - Internal Server Error
 **Solución:**

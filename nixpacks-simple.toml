@@ -1,4 +1,6 @@
-# Nixpacks Configuration for Railway - PHP Project
+# Configuración alternativa de Nixpacks - Sin Composer
+# Renombra este archivo a nixpacks.toml si tienes problemas con Composer
+
 [variables]
     PHP_VERSION = "8.1"
 
@@ -10,13 +12,12 @@ nixPkgs = [
     "php81Extensions.pdo_mysql",
     "php81Extensions.gd",
     "php81Extensions.zip",
-    "php81Extensions.mbstring",
-    "php81Packages.composer"
+    "php81Extensions.mbstring"
 ]
 
 [phases.build]
 cmds = [
-    "composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-interaction",
+    "echo 'Build sin Composer - usando librerías incluidas'",
     "chmod -R 755 .",
     "find . -type d -exec chmod 755 {} \\;",
     "find . -type f -exec chmod 644 {} \\;"
