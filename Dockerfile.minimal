@@ -1,0 +1,20 @@
+# Dockerfile ultra-mínimo - Solo PHP built-in server
+FROM php:8.2-cli
+
+# Instalar solo las extensiones MySQL necesarias
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos del proyecto
+COPY . .
+
+# Configurar permisos básicos
+RUN chmod -R 755 .
+
+# Exponer puerto para Railway
+EXPOSE $PORT
+
+# Usar servidor built-in de PHP
+CMD php -S 0.0.0.0:$PORT -t .

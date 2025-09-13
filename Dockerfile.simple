@@ -1,28 +1,8 @@
-# Usa una imagen oficial de PHP con Apache
+# Dockerfile simplificado - Solo extensiones esenciales
 FROM php:8.2-apache
 
-# Instalar dependencias del sistema necesarias para extensiones PHP
-RUN apt-get update && apt-get install -y \
-    zlib1g-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
-
-# Configurar y instalar extensiones de PHP necesarias
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        mysqli \
-        pdo \
-        pdo_mysql \
-        gd \
-        zip
-
-# Instalar extensiones adicionales que podríamos necesitar
-# RUN docker-php-ext-install gd zip
+# Instalar solo las extensiones esenciales
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Habilitar mod_rewrite de Apache
 RUN a2enmod rewrite

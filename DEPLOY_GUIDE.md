@@ -109,58 +109,60 @@ mysql -h [MYSQLHOST] -u [MYSQLUSER] -p[MYSQLPASSWORD] -P [MYSQLPORT] [MYSQLDATAB
 
 ## 🔧 Solución Rápida - Errores de Build
 
-### ❌ **Error de Composer:**
-```
+### ❌ **Errores Comunes:**
+```bash
+# Error de Composer
 composer: command not found
-```
 
-### ❌ **Error de PHP/Nixpkgs:**
-```
+# Error de PHP/Nixpkgs
 error: php80 has been dropped due to the lack of maintenance
+
+# Error de extensiones PHP
+Package requirements (zlib) were not met
 ```
 
 ### ✅ **Soluciones (En orden de prioridad):**
 
-#### **Opción 1: Configuración PHP 8.2 (Recomendada)**
+#### **Opción 1: Dockerfile Completo (Recomendado)**
 ```bash
-# Ya actualizada - usar la configuración actual
+# Ya actualizado con dependencias necesarias
 git add .
-git commit -m "Actualizar a PHP 8.2"
+git commit -m "Usar Dockerfile completo con dependencias"
 git push
 ```
+✅ Incluye: Apache, GD, ZIP, todas las extensiones PHP
 
-#### **Opción 2: Configuración Ultra-Simple**
+#### **Opción 2: Dockerfile Simple**
 ```bash
-# Si persisten problemas con Nixpacks
+# Si hay problemas con extensiones adicionales
+cp Dockerfile.simple Dockerfile
+git add .
+git commit -m "Usar Dockerfile simple - solo extensiones esenciales"
+git push
+```
+✅ Solo extensiones MySQL esenciales
+
+#### **Opción 3: Dockerfile Mínimo**
+```bash
+# Configuración ultra-mínima
+cp Dockerfile.minimal Dockerfile
+git add .
+git commit -m "Usar Dockerfile mínimo con PHP built-in server"
+git push
+```
+✅ PHP CLI con servidor built-in
+
+#### **Opción 4: Volver a Nixpacks**
+```bash
+# Si prefieres Nixpacks
+rm Dockerfile
+cp railway-nixpacks.json railway.json
 cp nixpacks-ultra-simple.toml nixpacks.toml
 git add .
-git commit -m "Usar configuración ultra-simple"
+git commit -m "Volver a Nixpacks ultra-simple"
 git push
 ```
-
-#### **Opción 3: Usar Dockerfile (Más Estable)**
-```bash
-# Eliminar nixpacks.toml para usar Dockerfile
-rm nixpacks.toml
-git add .
-git commit -m "Usar Dockerfile en lugar de Nixpacks"
-git push
-```
-
-#### **Opción 4: Sin Dependencias**
-```bash
-# Configuración mínima sin Composer
-cp nixpacks-simple.toml nixpacks.toml
-git add .
-git commit -m "Usar configuración sin dependencias externas"
-git push
-```
-
-### ✅ **Por qué estas opciones funcionan:**
-- ✅ **PHP 8.2**: Versión más estable y mantenida
-- ✅ **Dockerfile**: Control total del entorno
-- ✅ **Sin Composer**: Tu proyecto ya tiene todas las librerías
-- ✅ **Ultra-simple**: Mínima configuración, máxima compatibilidad
+✅ Sin dependencias complejas
 
 ## 🔧 Paso 5: Verificar Configuración
 
