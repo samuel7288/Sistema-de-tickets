@@ -1,9 +1,8 @@
 <?php 
 session_start();
-if(isset($_SESSION['usuario'])){
+if(isset($_SESSION['usuario']) and isset($_SESSION['rol']) and $_SESSION['rol']=='administrador'){
 
 	?>
-
 
 
 	<!DOCTYPE html>

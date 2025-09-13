@@ -22,18 +22,32 @@ if(isset($_SESSION['usuario'])){
                 </div>
                 <p class="current-date" id="currentDate"></p>
             </div>
-        </div>
-
-        <div class="action-buttons">
+        </div>        <div class="action-buttons">
             <button class="btn-action" id="ventaTicketsBtn">
                 <i class="fas fa-cart-plus"></i>
                 Vender Tickets
             </button>
+            <button class="btn-action" id="ventasHechasBtn">
+                <i class="fas fa-history"></i>
+                Ventas Realizadas
+            </button>
+            <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 'administrador'): ?>
+            <button class="btn-action btn-danger" id="anularTicketsBtn">
+                <i class="fas fa-ban"></i>
+                Anular Tickets
+            </button>
+            <button class="btn-action btn-warning" id="historialAnulacionesBtn">
+                <i class="fas fa-clipboard-list"></i>
+                Historial Anulaciones
+            </button>
+            <?php endif; ?>
         </div>
 
         <div class="content-panels">
             <div id="ventaTickets" class="panel-section"></div>
             <div id="ventasHechas" class="panel-section"></div>
+            <div id="anularTickets" class="panel-section"></div>
+            <div id="historialAnulaciones" class="panel-section"></div>
         </div>
     </div>
 
@@ -48,18 +62,30 @@ if(isset($_SESSION['usuario'])){
                 esconderSeccionVenta();
                 $('#ventaTickets').load('ventas/ventasDeTickets.php');
                 $('#ventaTickets').show().addClass('animate__animated animate__fadeIn');
-            });
-
-            $('#ventasHechasBtn').click(function(){
+            });            $('#ventasHechasBtn').click(function(){
                 esconderSeccionVenta();
                 $('#ventasHechas').load('ventas/ventasyReportes.php');
                 $('#ventasHechas').show().addClass('animate__animated animate__fadeIn');
+            });
+
+            $('#anularTicketsBtn').click(function(){
+                esconderSeccionVenta();
+                $('#anularTickets').load('ventas/anularTickets.php');
+                $('#anularTickets').show().addClass('animate__animated animate__fadeIn');
+            });
+
+            $('#historialAnulacionesBtn').click(function(){
+                esconderSeccionVenta();
+                $('#historialAnulaciones').load('ventas/historialAnulaciones.php');
+                $('#historialAnulaciones').show().addClass('animate__animated animate__fadeIn');
             });
         });
 
         function esconderSeccionVenta(){
             $('#ventaTickets').hide();
             $('#ventasHechas').hide();
+            $('#anularTickets').hide();
+            $('#historialAnulaciones').hide();
         }
 
     </script>

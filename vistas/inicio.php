@@ -22,8 +22,10 @@
         </div>
 
         <div class="company-section animate__animated animate__fadeInUp">
-            
-            <h1 class="company-title">Feria Entretenimiento S.A</h1>
+            <div class="logo-container">
+                <img src="../img/JUEGOATRACCIONES.jpg" alt="Plaza Mundo Logo" class="company-logo">
+            </div>
+            <h1 class="company-title">Entretenimiento S.A</h1>
             <p class="company-description">
                 Somos líderes en entretenimiento familiar, brindando diversión y seguridad en cada evento.
             </p>
@@ -83,7 +85,7 @@
             <div class="contact-cards">
                 <div class="contact-item">
                     <i class="fas fa-envelope pulse"></i>
-                    <p>soporte@feria.com</p>
+                    <p>soporte@Feria.com</p>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone pulse"></i>
