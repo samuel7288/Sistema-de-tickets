@@ -1,0 +1,45 @@
+# Logs
+*.log
+error.log
+access.log
+
+# Cache
+cache/
+tmp/
+temp/
+
+# Environment variables
+.env
+
+# PHP temp files
+*.tmp
+
+# Composer
+/vendor/
+composer.phar
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Backups
+*.bak
+*.backup
+*.sql~
+
+# Uploads (keep structure)
+archivos/*.jpg
+archivos/*.png
+archivos/*.gif
+archivos/*.pdf
+!archivos/.gitkeep
+
+# Railway
+.railway/

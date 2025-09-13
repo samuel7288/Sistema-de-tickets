@@ -87,17 +87,17 @@ CREATE TABLE imagenes (
 --
 
 INSERT INTO imagenes (id_imagen, id_categoria, nombre, ruta, fechaSubida) VALUES
-(1, 1, 'Montanarusa.jpg', '../../img/Montanarusa.jpg', '2024-11-09'),
-(2, 1, 'torrecaidalibre.jpg', '../../img/torrecaidalibre.jpg', '2024-11-09'),
-(3, 2, 'carrusel.jpg', '../../img/carrusel.jpg', '2024-11-09'),
-(4, 2, 'ruedafortuna.jpg', '../../img/ruedafortuna.jpg', '2024-11-09'),
-(5, 3, 'gusanito.jpg', '../../img/gusanito.jpg', '2024-11-09'),
-(6, 4, 'autoschocones.jpg', '../../img/autoschocones.jpg', '2024-11-09'),
-(7, 4, 'sillasvoladoras.jpg', '../../img/sillasvoladoras.jpg', '2024-11-09'),
-(8, 5, 'showmagia.jpg', '../../img/showmagia.jpg', '2024-11-09'),
-(9, 5, 'conciertovivo.jpg', '../../img/conciertovivo.jpg', '2024-11-09'),
-(10, 6, 'algodon.jpg', '../../img/algodon.jpg', '2024-11-09'),
-(11, 6, 'carritohot.jpg', '../../img/carritohot.jpg', '2024-11-09');
+(1, 1, 'Montanarusa.jpg', 'img/Montanarusa.jpg', '2024-11-09'),
+(2, 1, 'torrecaidalibre.jpg', 'img/torrecaidalibre.jpg', '2024-11-09'),
+(3, 2, 'carrusel.jpg', 'img/carrusel.jpg', '2024-11-09'),
+(4, 2, 'ruedafortuna.jpg', 'img/ruedafortuna.jpg', '2024-11-09'),
+(5, 3, 'gusanito.jpg', 'img/gusanito.jpg', '2024-11-09'),
+(6, 4, 'autoschocones.jpg', 'img/autoschocones.jpg', '2024-11-09'),
+(7, 4, 'sillasvoladoras.jpg', 'img/sillasvoladoras.jpg', '2024-11-09'),
+(8, 5, 'showmagia.jpg', 'img/showmagia.jpg', '2024-11-09'),
+(9, 5, 'conciertovivo.jpg', 'img/conciertovivo.jpg', '2024-11-09'),
+(10, 6, 'algodon.jpg', 'img/algodon.jpg', '2024-11-09'),
+(11, 6, 'carritohot.jpg', 'img/carritohot.jpg', '2024-11-09');
 
 -- --------------------------------------------------------
 --

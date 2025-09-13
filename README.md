@@ -1,6 +1,58 @@
-# FeriaPlazaMundo - Sistema de Tickets
+# Sistema de Gestión de Tickets - Parque de Diversiones
 
-Sistema integral de gestión de tickets para ferias y eventos, con funcionalidades avanzadas de administración de usuarios y anulación de tickets.
+Sistema completo de venta y gestión de tickets para parque de diversiones con PHP y MySQL.
+
+## 🚀 Despliegue en Railway
+
+### Requisitos
+- Cuenta en [Railway](https://railway.app/)
+- Repositorio en GitHub
+
+### Pasos para desplegar:
+
+#### 1. Preparar el repositorio
+```bash
+git add .
+git commit -m "Preparar para despliegue en Railway"
+git push origin main
+```
+
+#### 2. Crear proyecto en Railway
+1. Ve a [Railway](https://railway.app/) e inicia sesión
+2. Haz clic en "New Project"
+3. Selecciona "Deploy from GitHub repo"
+4. Conecta tu repositorio de GitHub
+5. Selecciona este repositorio
+
+#### 3. Agregar base de datos MySQL
+1. En tu proyecto de Railway, haz clic en "New Service"
+2. Selecciona "Database" → "Add MySQL"
+3. Railway generará automáticamente las credenciales de la base de datos
+
+#### 4. Configurar variables de entorno
+Railway configurará automáticamente estas variables:
+- `MYSQLHOST` - Host de la base de datos
+- `MYSQLUSER` - Usuario de la base de datos  
+- `MYSQLPASSWORD` - Contraseña de la base de datos
+- `MYSQLDATABASE` - Nombre de la base de datos
+- `MYSQLPORT` - Puerto de la base de datos (3306)
+- `RAILWAY_ENVIRONMENT` - Marcador de entorno Railway
+
+#### 5. Importar esquema de base de datos
+1. Espera a que se despliegue la aplicación
+2. Ve a la pestaña "Data" del servicio MySQL en Railway
+3. Usa el cliente MySQL para conectarte a la base de datos
+4. Ejecuta el script SQL que se encuentra en `bd/tiquetera2.sql`
+
+O usa phpMyAdmin/Adminer desde Railway:
+1. Agrega un nuevo servicio usando la imagen de phpMyAdmin
+2. Configura las variables de entorno para conectar a tu MySQL
+3. Importa el archivo `bd/tiquetera2.sql`
+
+#### 6. Verificar despliegue
+- La aplicación estará disponible en la URL que Railway proporcione
+- Usuario por defecto: `admin`
+- Contraseña por defecto: `hello` (SHA1: `d033e22ae348aeb5660fc2140aec35850c4da997`)
 
 ## Características Principales
 
@@ -21,7 +73,7 @@ Sistema integral de gestión de tickets para ferias y eventos, con funcionalidad
 - Auditoria completa de anulaciones
 - Historial de tickets anulados
 
-## Instalación
+## Instalación Local (XAMPP)
 
 ### Requisitos
 - PHP 7.4 o superior
