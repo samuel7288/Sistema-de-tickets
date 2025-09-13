@@ -1,52 +1,20 @@
-# Usa una imagen oficial de PHP con Apache
-FROM php:8.2-apache
+# Dockerfile ultra-simple y confiable para Railway
+FROM php:8.2-cli
 
-# Instalar dependencias del sistema necesarias para extensiones PHP
-RUN apt-get update && apt-get install -y \
-    zlib1g-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+# Instalar solo extensiones MySQL esenciales
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Configurar y instalar extensiones de PHP necesarias
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        mysqli \
-        pdo \
-        pdo_mysql \
-        gd \
-        zip
-
-# Instalar extensiones adicionales que podríamos necesitar
-# RUN docker-php-ext-install gd zip
-
-# Habilitar mod_rewrite de Apache
-RUN a2enmod rewrite
-
-# Configurar Apache para escuchar en el puerto dinámico de Railway
-RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+# Crear directorio de trabajo
+WORKDIR /app
 
 # Copiar archivos del proyecto
-COPY . /var/www/html/
+COPY . .
 
 # Configurar permisos
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+RUN chmod -R 755 .
 
-# Crear script de inicio que configure el puerto dinámicamente
-RUN echo '#!/bin/bash\n\
-if [ -n "$PORT" ]; then\n\
-    sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf\n\
-    sed -i "s/:80/:$PORT/" /etc/apache2/sites-available/000-default.conf\n\
-fi\n\
-apache2-foreground' > /start.sh && chmod +x /start.sh
+# Crear archivo de prueba simple
+RUN echo '<?php echo "OK - Sistema funcionando"; ?>' > /app/health.php
 
-# Exponer puerto (Railway lo configurará dinámicamente)
-EXPOSE $PORT
-
-# Comando por defecto
-CMD ["/start.sh"]
+# Usar servidor PHP built-in (más simple y confiable)
+CMD php -S 0.0.0.0:$PORT -t .
