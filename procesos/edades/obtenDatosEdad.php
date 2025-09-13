@@ -8,4 +8,3 @@
 	echo json_encode($obj->obtenDatosEdad($_POST['idedad']));
 
  ?>
- 
