@@ -155,6 +155,7 @@ CREATE TABLE usuarios (
 
 INSERT INTO usuarios (id_usuario, nombre, apellido, email, password, rol, fechaCaptura) VALUES
 (1, 'Jose', 'Antonio', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'administrador', '2024-11-09');
+(2, 'Mario', 'Perez', 'personal', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'personal', '2024-11-09');
 
 -- --------------------------------------------------------
 
