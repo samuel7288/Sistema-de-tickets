@@ -1,7 +1,4 @@
 <?php 
-    // SOLUCIÓN DEFINITIVA: Incluir manejador de errores global
-    require_once "../config/error_handler.php";
-    
     session_start();
     if(isset($_SESSION['usuario']) and isset($_SESSION['rol']) and $_SESSION['rol']=='administrador'){
         require_once "../config/conexion.php";
@@ -116,25 +113,6 @@
         .pdf-button:hover {
             background-color: #c82333;
         }
-        .csv-button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0 20px 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .csv-button:hover {
-            background-color: #218838;
-        }
-        .report-buttons {
-            display: inline-flex;
-            gap: 10px;
-        }
     </style>
     
     <!-- Agregar DateRangePicker y Chart.js -->
@@ -213,16 +191,10 @@
                     <h1>Panel de Control</h1>
                 </div>
                 <p class="current-date" id="live-datetime"></p>
-                <div class="report-buttons">
-                    <button onclick="generarPDF()" class="pdf-button">
-                        <i class="fas fa-file-pdf"></i>
-                        Generar Reporte PDF
-                    </button>
-                    <button onclick="generarCSV()" class="csv-button">
-                        <i class="fas fa-file-excel"></i>
-                        Generar Reporte Excel
-                    </button>
-                </div>
+                <button onclick="generarPDF()" class="pdf-button">
+                    <i class="fas fa-file-pdf"></i>
+                    Generar Reporte PDF
+                </button>
             </div>
         </div>
         
@@ -425,18 +397,7 @@
 
     <script>
         function generarPDF() {
-            // Usar la versión HTML que funciona perfectamente
-            window.location.href = 'test_pdf_simple.php';
-        }
-        
-        function generarCSV() {
-            // Generar reporte en formato Excel con diseño mejorado
-            window.location.href = 'generar_reporte_csv.php';
-        }
-        
-        function generarReporteAlternativo() {
-            // Versión alternativa más segura
-            window.location.href = 'generar_reporte_seguro.php';
+            window.location.href = 'generar_reporte.php';
         }
         // Update every second
         setInterval(updateDateTime, 1000);
